@@ -18,17 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
-    
-    private func setBackgroundColor() {
-        colorView.backgroundColor = UIColor(
-            red: CGFloat(redSlider.value),
-            green: CGFloat(greenSlider.value),
-            blue: CGFloat(blueSlider.value),
-            alpha: 1.0
-        )
-    }
-    
+        
     override func viewDidLoad() {
+        super.viewDidLoad()
         colorView.layer.cornerRadius = 10
         redValueLabel.text = String(redSlider.value)
         greenValueLabel.text = String(greenSlider.value)
@@ -49,5 +41,13 @@ class ViewController: UIViewController {
         setBackgroundColor()
     }
     
+    private func setBackgroundColor() {
+        colorView.backgroundColor = UIColor(
+            red: CGFloat(redSlider.value),
+            green: CGFloat(greenSlider.value),
+            blue: CGFloat(blueSlider.value),
+            alpha: 1.0
+        )
+    }
 }
 
