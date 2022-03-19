@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SettingViewController.swift
 //  ColorChooser
 //
 //  Created by Konstantin Korchak on 04.03.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SettingViewController: UIViewController {
     
     @IBOutlet var colorView: UIView!
     
