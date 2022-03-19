@@ -18,29 +18,26 @@ class SettingViewController: UIViewController {
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         colorView.layer.cornerRadius = 10
-        redValueLabel.text = String(redSlider.value)
-        greenValueLabel.text = String(greenSlider.value)
-        blueValueLabel.text = String(blueSlider.value)
         setBackgroundColor()
+        setValue(for: redValueLabel, greenValueLabel, blueValueLabel)
     }
     
-    @IBAction func redSliderChanger() {
-        redValueLabel.text = String(round(redSlider.value * 100) / 100)
+    @IBAction func slidersSetup(_ sender: UISlider) {
         setBackgroundColor()
+        switch sender {
+        case redSlider: setValue(for: redValueLabel)
+        case greenSlider: setValue(for: greenValueLabel)
+        default: setValue(for: blueValueLabel)
+        }
     }
-    @IBAction func greenSliderChanger() {
-        greenValueLabel.text = String(round(greenSlider.value * 100) / 100)
-        setBackgroundColor()
-    }
-    @IBAction func blueSliderChanger() {
-        blueValueLabel.text = String(round(blueSlider.value * 100) / 100)
-        setBackgroundColor()
-    }
-    
+}
+
+// MARK: - Private func
+extension SettingViewController {
     private func setBackgroundColor() {
         colorView.backgroundColor = UIColor(
             red: CGFloat(redSlider.value),
@@ -49,5 +46,21 @@ class SettingViewController: UIViewController {
             alpha: 1.0
         )
     }
+    
+    private func setValue(for labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+            case redValueLabel:
+                redValueLabel.text = string(from: redSlider)
+            case greenValueLabel:
+                greenValueLabel.text = string(from: greenSlider)
+            default:
+                blueValueLabel.text = string(from: blueSlider)
+            }
+        }
+    }
+    
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
+    }
 }
-
