@@ -42,7 +42,7 @@ class SettingViewController: UIViewController {
         blueSlider.value = getFloatRGB(for: blueSlider)
         
         setValue(for: redValueLabel, greenValueLabel, blueValueLabel)
-    
+        
         setBackgroundColor()
     }
     
@@ -130,6 +130,17 @@ extension SettingViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
+    
+    private func setFirstValueToTextField(_ textField: UITextField) {
+        switch textField {
+        case redTextField:
+            textField.text = string(from: redSlider)
+        case greenTextField:
+            textField.text = string(from: greenSlider)
+        default:
+            textField.text = string(from: blueSlider)
+        }
+    }
 }
 
 // MARK: - Keyboard setup
@@ -148,7 +159,7 @@ extension SettingViewController: UITextFieldDelegate {
             setBackgroundColor()
         } else {
             alertCorrectValue()
-            textField.text = "0"
+            setFirstValueToTextField(textField)
         }
     }
     
@@ -163,7 +174,7 @@ extension SettingViewController: UITextFieldDelegate {
             textField.inputAccessoryView = keypadToolbar
         }
     }
-        
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
@@ -173,5 +184,4 @@ extension SettingViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
 }
