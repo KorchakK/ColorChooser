@@ -33,6 +33,8 @@ class SettingViewController: UIViewController {
         greenTextField.delegate = self
         blueTextField.delegate = self
         
+        addDoneButtonOnNumpad(textFields: redTextField, greenTextField, blueTextField)
+        
         colorView.layer.cornerRadius = 10
         
         redSlider.value = getFloatRGB(for: redSlider)
@@ -150,6 +152,18 @@ extension SettingViewController: UITextFieldDelegate {
         }
     }
     
+    func addDoneButtonOnNumpad(textFields: UITextField...) {
+        textFields.forEach { textField in
+            let keypadToolbar: UIToolbar = UIToolbar()
+            keypadToolbar.items=[
+                UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
+                UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: textField, action: #selector(UITextField.resignFirstResponder))
+            ]
+            keypadToolbar.sizeToFit()
+            textField.inputAccessoryView = keypadToolbar
+        }
+    }
+        
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
