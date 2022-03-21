@@ -11,24 +11,13 @@ protocol SettingViewControllerDelegate {
     func setBackgroundColor(for color: UIColor)
 }
 
-class MainViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-}
-
-    // MARK: - Navigation
-extension MainViewController {
+class MainViewController: UIViewController, SettingViewControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let settingVC = segue.destination as? SettingViewController else { return }
         settingVC.mainScreenColor = view.backgroundColor
         settingVC.delegate = self
     }
-}
-// MARK: - Navigation
-extension MainViewController: SettingViewControllerDelegate {
+    
     func setBackgroundColor(for color: UIColor) {
         view.backgroundColor = color
     }

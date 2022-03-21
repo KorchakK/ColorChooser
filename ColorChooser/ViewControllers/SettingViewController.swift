@@ -167,8 +167,17 @@ extension SettingViewController: UITextFieldDelegate {
         textFields.forEach { textField in
             let keypadToolbar: UIToolbar = UIToolbar()
             keypadToolbar.items=[
-                UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
-                UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: textField, action: #selector(UITextField.resignFirstResponder))
+                UIBarButtonItem(
+                    barButtonSystemItem: .flexibleSpace,
+                    target: self,
+                    action: nil
+                ),
+                UIBarButtonItem(
+                    title: "Done",
+                    style: UIBarButtonItem.Style.done,
+                    target: textField,
+                    action: #selector(UITextField.resignFirstResponder)
+                )
             ]
             keypadToolbar.sizeToFit()
             textField.inputAccessoryView = keypadToolbar
@@ -178,10 +187,5 @@ extension SettingViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }
